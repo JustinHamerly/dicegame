@@ -68,4 +68,7 @@ function counter(dice){
   return filtered;
 }
 
-calculateScore(rollDice())
+module.exports = {
+  rollDice,
+  calculateScore,
+}

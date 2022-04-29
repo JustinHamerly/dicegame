@@ -19,14 +19,19 @@ class Game{
     console.log('(y)es to play or (n)o to decline');
     let input = prompt('> ');
 
-    if(input = 'n'){
+    if(input === 'n'){
       console.log('Maybe later!')
     }else if(input = 'y'){
       for(let i=0; i<this.numRounds; i++){
         // play game passing in roundNum
       }
-      // end round
+      this.endGame()
     }
+  }
+
+  endGame(){
+    console.log('Thanks for playing!  See you next time.');
+    return;
   }
 }
 

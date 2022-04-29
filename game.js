@@ -46,7 +46,7 @@ class Game{
 
     let rollScore = gameLogic.calculateScore(roll);
     if(rollScore === 0){
-      //zilch
+      this.zilch()
       return
     } 
 
@@ -76,6 +76,14 @@ class Game{
     }else if(input === 'q'){
       this.endGame();
     }
+  }
+
+  zilch(roundNum){
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    console.log("|         Zilch!!! Round over          |")
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+    // end round
   }
 }
 

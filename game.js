@@ -93,21 +93,27 @@ class Game{
   }
 
   validateKeepers(roll){
-    console.log('Enter dice to keep, or (q)uit');
-    let input = prompt('> ');
-    if(input === 'q'){
-      this.endGame();
+    while(true){
+      console.log('Enter dice to keep, or (q)uit');
+      let input = prompt('> ');
+      if(input === 'q'){
+        this.endGame();
+      }
+      let inputArray = input.split('');
+      let keeperValues = [];
+  
+      for(let char of inputArray){  
+        let parsedNum = parseInt(char);
+        keeperValues.push(parsedNum);
+      }
+      
+      if (gameLogic.validate(roll, keeperValues)){
+        return keeperValues
+      }else{
+        console.log('Cheater!')
+        console.log('>>> ' + roll + ' <<<');
+      }
     }
-    let inputArray = input.split('');
-    let keeperValues = [];
-
-    for(let char of inputArray){  
-      keeperValues.push(char);
-    }
-    
-    //check game logic validate keepers.  if true then:
-    return keeperValues
-    // else print cheater error and roll again
   }
 }
 

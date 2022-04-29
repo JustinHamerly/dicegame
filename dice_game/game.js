@@ -117,7 +117,4 @@ class Game{
   }
 }
 
-const game = new Game(3)
-console.log(game)
-
-game.play()
+module.exports = Game

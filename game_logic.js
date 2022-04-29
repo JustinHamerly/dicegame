@@ -68,7 +68,31 @@ function counter(dice){
   return filtered;
 }
 
-module.exports = {
-  rollDice,
-  calculateScore,
+function validate(roll, keepers){
+  let rolled = roll;
+  let valid = true;
+
+  keepers.forEach(dice => {
+    let found = false;
+
+    for(let i=0; i<rolled.length; i++){
+      if(rolled[i] === dice){
+        found = true;
+        rolled[i] = 0
+        break;
+      }
+    }
+    
+    if(found === false){
+      valid = false
+    }
+
+  })
+
+  return valid
 }
+
+console.log(validate([1,2,2,3,4,4], [1,2, 5]))
+// console.log(validate([1,2,2,3,4,4], [1,6]))
+
+module.exports = {rollDice, calculateScore, validate}

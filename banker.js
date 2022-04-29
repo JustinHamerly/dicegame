@@ -1,4 +1,4 @@
-export default class Banker{
+class Banker{
   constructor(){
     this.balance = 0;
     this.shelved = 0;
@@ -19,3 +19,5 @@ export default class Banker{
     self.shelved = 0
   }
 }
+
+module.exports = Banker

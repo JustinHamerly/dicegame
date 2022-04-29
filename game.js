@@ -90,6 +90,25 @@ class Game{
     console.log(`You banked ${bankedPoints} points in round ${roundNum}`);
     console.log(`Total score is ${this.banker.balance} points`);
   }
+
+  validateKeepers(roll){
+    console.log('Enter dice to keep, or (q)uit');
+    let input = prompt('> ');
+    if(input === 'q'){
+      this.endGame();
+    }
+
+    let keeperValues = [];
+    for(let char in input){
+      if(typeof char === 'number'){
+        keeperValues.push(char);
+      }
+    }
+    
+    //check game logic validate keepers.  if true then:
+    return keeperValues
+    // else print cheater error and roll again
+  }
 }
 
 const game = new Game()

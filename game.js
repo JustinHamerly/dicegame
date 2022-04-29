@@ -46,7 +46,7 @@ class Game{
 
     let rollScore = gameLogic.calculateScore(roll);
     if(rollScore === 0){
-      this.zilch()
+      this.zilch(roundNum)
       return
     } 
 
@@ -68,7 +68,7 @@ class Game{
     if(input === 'b'){
       this.banker.shelf(roundScore);
       let bankedPoints = this.banker.bank();
-      //end round passing in roundNum and bankedPoints
+      this.endRound(roundNum, bankedPoints);
     }else if(input === 'r'){
       if(numOfDice === 0){
         numOfDice = 6;
@@ -83,7 +83,12 @@ class Game{
     console.log("|         Zilch!!! Round over          |")
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-    // end round
+    this.endRound(roundNum, 0)
+  }
+
+  endRound(roundNum, bankedPoints){
+    console.log(`You banked ${bankedPoints} points in round ${roundNum}`);
+    console.log(`Total score is ${this.banker.balance} points`);
   }
 }
 

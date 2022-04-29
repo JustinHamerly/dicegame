@@ -92,7 +92,4 @@ function validate(roll, keepers){
   return valid
 }
 
-console.log(validate([1,2,2,3,4,4], [1,2, 5]))
-// console.log(validate([1,2,2,3,4,4], [1,6]))
-
 module.exports = {rollDice, calculateScore, validate}

@@ -12,11 +12,11 @@ class Banker{
   }
 
   shelf(amt){
-    self.shelved += amt
+    this.shelved += amt
   }
 
   clearShelf(){
-    self.shelved = 0
+    this.shelved = 0
   }
 }
 

@@ -21,9 +21,10 @@ class Game{
 
     if(input === 'n'){
       console.log('Maybe later!')
-    }else if(input = 'y'){
+    }else if(input === 'y'){
       for(let i=0; i<this.numRounds; i++){
-        this.startRound(this.roundNum)
+        this.startRound(this.roundNum);
+        this.roundNum++;
       }
       this.endGame()
     }
@@ -39,42 +40,42 @@ class Game{
     let numOfDice = 6;
     let roundScore = 0;
 
-    console.log('Rolling ' + numOfDice + ' dice...')
+    while(true){
 
-    const roll = this.roller(numOfDice);
-    console.log('>>> ' + roll + ' <<<');
+      console.log('Rolling ' + numOfDice + ' dice...')
+  
+      const roll = this.roller(numOfDice);
+      console.log('>>> ' + roll + ' <<<');
+  
+      let rollScore = gameLogic.calculateScore(roll);
+      if(rollScore === 0){
+        this.zilch(roundNum)
+        return
+      } 
+  
+      const keeperValues = this.validateKeepers(roll);
+      const keeperScore = gameLogic.calculateScore(keeperValues);
 
-    let rollScore = gameLogic.calculateScore(roll);
-    if(rollScore === 0){
-      this.zilch(roundNum)
-      return
-    } 
-
-    // TODO: implement keeperValidate
-
-    const keeperScore = gameLogic.calculateScore(keeperValues);
-    roundScore += keeperScore;
-    numOfDice -= keeperValues.length;
-
-    console.log(`You have ${roundScore} unbanked points and ${numOfDice} dice remaining`);
-    console.log('(r)oll again, (b)ank your points or (q)uit:');
-
-    let input = prompt('> ');
-    while(input != 'r' || input != 'b' || input != 'q'){
-      console.log('please either (r)oll, (b)ank, or (q)uit');
-      input = prompt('> ');
-    }
-
-    if(input === 'b'){
-      this.banker.shelf(roundScore);
-      let bankedPoints = this.banker.bank();
-      this.endRound(roundNum, bankedPoints);
-    }else if(input === 'r'){
-      if(numOfDice === 0){
-        numOfDice = 6;
+      roundScore += keeperScore;
+      numOfDice -= keeperValues.length;
+  
+      console.log(`You have ${roundScore} unbanked points and ${numOfDice} dice remaining`);
+      console.log('(r)oll again, (b)ank your points or (q)uit:');
+  
+      let input = prompt('> ');
+  
+      if(input === 'b'){
+        this.banker.shelf(roundScore);
+        let bankedPoints = this.banker.bank();
+        this.endRound(roundNum, bankedPoints);
+        break;
+      }else if(input === 'r'){
+        if(numOfDice === 0){
+          numOfDice = 6;
+        }
+      }else if(input === 'q'){
+        this.endGame();
       }
-    }else if(input === 'q'){
-      this.endGame();
     }
   }
 
@@ -97,12 +98,11 @@ class Game{
     if(input === 'q'){
       this.endGame();
     }
-
+    let inputArray = input.split('');
     let keeperValues = [];
-    for(let char in input){
-      if(typeof char === 'number'){
-        keeperValues.push(char);
-      }
+
+    for(let char of inputArray){  
+      keeperValues.push(char);
     }
     
     //check game logic validate keepers.  if true then:
@@ -111,6 +111,7 @@ class Game{
   }
 }
 
-const game = new Game()
+const game = new Game(3)
+console.log(game)
 
 game.play()
